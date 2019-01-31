@@ -86,9 +86,37 @@ hr {
 
 
 <script>
+
+
+
 // Set the date we're counting down to
 var countDownDate = new Date("Feb 1, 2019 15:37:25").getTime();
 
+var parallax = document.getElementsByClassName('parallax')
+var parallaxtext = document.getElementsByClassName('middle')
+
+var scrollheight = 	document.body.scrollHeight // height of entire document
+var windowheight = window.innerHeight // height of browser window
+
+var ismobile = (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent.toLowerCase()))
+if (ismobile){
+ // bypass parallax effect
+
+ window.addEventListener('scroll', function(){ // on page scroll
+	parallaxing()// call parallaxbubbles() on next available screen repaint
+}, false)
+
+
+function parallaxing(){
+	var scrolltop = window.pageYOffset // get number of pixels document has scrolled vertically
+	var scrollamount = (scrolltop / (scrollheight-windowheight)) * 100 // get amount scrolled (in %)
+	parallaxtext.style.top = -scrolltop * .2 + 'px' // move text at 20% of scroll speed
+
+}
+
+
+
+}
 // Update the count down every 1 second
 var countdownfunction = setInterval(function() {
 
